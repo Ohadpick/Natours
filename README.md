@@ -8,8 +8,9 @@ Main Features:
   5. User Settings
   6. User reviews
   7. User bookings
-  
-Database: Mongodb - stored on ATLAS MongoDB (AWS)
-Backend:  NodeJS & Express Restful API using Mongoose. 
+ 
+The Stack:
+1. Database: Mongodb - stored on ATLAS MongoDB (AWS)
+2. Backend:  NodeJS & Express Restful API using Mongoose. 
           jsonwebtoken, promisify, and crypto for security.
-Frontend: Angular 9
+3. Frontend: Angular 9
