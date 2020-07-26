@@ -57,4 +57,4 @@ Thumbs.db
 /public/*.html
 /routes/viewRoutes.js
 /views
-
+config.env
