@@ -1,0 +1,14 @@
+<div class="content">
+  <div class="reviews__card">
+    <div class="reviews__avatar">
+      <img class="reviews__avatar-img" src="{{utilService.serverResourceUrl()}}img/users/{{review.user[0].photo}}" alt="{{review.user[0].name}}"/>
+      <h6 class="reviews__user">{{review.user[0].name}}</h6>
+    </div>
+    <p class="reviews__text">{{review.review}}</p>
+    <div class="reviews__rating">
+      <svg *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="getReviewClass(review, star)">
+        <use xlink:href="/assets/img/icons.svg#icon-star"></use>
+      </svg>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card__header">
+  <div class="card__picture">
+      <div class="card__picture-overlay">&nbsp;</div><img class="card__picture-img" src="{{utilService.serverResourceUrl()}}img/tours/{{review.tour[0].imageCover}}" alt="{{review.tour[0].name}}"/>
+  </div>
+  <h3 class="heading-tertirary"><span>{{review.tour[0].name}}</span></h3>
+  </div>
+  <div class="card__details">
+  <h4 class="card__sub-heading">{{review.tour[0].difficulty}} {{review.tour[0].duration}}-day tour</h4>
+  <p class="card__text">{{review.tour[0].summary}}</p>
+</div>
+<div class="content">
+  <div class="reviews__card">
+    <div class="reviews__avatar">
+      <img class="reviews__avatar-img" src="{{utilService.serverResourceUrl()}}img/users/{{review.user[0].photo}}" alt="{{review.user[0].name}}"/>
+      <h6 class="reviews__user">{{review.user[0].name}}</h6>
+    </div>
+
+    <p *ngIf="!this.editable" class="reviews__text">{{review.review}}</p>
+    <div *ngIf="!this.editable" class="reviews__rating">
+      <svg *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="getReviewClass(review, star)">
+        <use xlink:href="/assets/img/icons.svg#icon-star"></use>
+      </svg>
+    </div>
+    <button *ngIf="!this.editable" class="btn btn--small btn--green btn--save-settings btn__align__right" 
+          (click)="toggleEdit()">Update</button>
+
+    <form *ngIf="this.editable" class="form form-user-data" #reviewForm="ngForm" (ngSubmit)="updateReview()">
+      <input class="form__input" id="review" type="text" value="review.review" required="required" name="review"
+          name="review" required [(ngModel)]="review.review" />
+      <ngx-star-rating name="rating" id="rating" [(ngModel)]="review.rating"></ngx-star-rating>
+      <button class="btn btn--small btn--green btn--save-settings btn__align__right_2" 
+          (click)="toggleEdit()">Cancel</button>
+      <button class="btn btn--small btn--green btn--save-settings btn__align__right" 
+          type="submit">Save</button>
+    </form>
+
+    <!-- <form class="form form-user-data" #reviewForm="ngForm" (ngSubmit)="updateReview()">
+      <p *ngIf="!this.editable" class="reviews__text">{{review.review}}</p>
+      <input *ngIf="this.editable" class="form__input" id="review" type="text" value="review.review" required="required" name="review"
+          name="review" required [(ngModel)]="review.review" />
+      <div *ngIf="!this.editable" class="reviews__rating">
+        <svg *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="getReviewClass(review, star)">
+          <use xlink:href="/assets/img/icons.svg#icon-star"></use>
+        </svg>
+      </div>
+      <ngx-star-rating *ngIf="this.editable" name="rating" id="rating" [(ngModel)]="review.rating"></ngx-star-rating>
+      <button *ngIf="!this.editable" class="btn btn--small btn--green btn--save-settings btn__align__right" 
+          (click)="editForm()">Update</button>
+        <button *ngIf="this.editable" class="btn btn--small btn--green btn--save-settings btn__align__right" 
+          type="submit">Save</button>
+    </form> -->
+  </div>
+</div>

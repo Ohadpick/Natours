@@ -1,0 +1,14 @@
+.dropdown-toggle, .dropdown-item {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    width: 200px;
+    font-size: medium;
+}
+
+.nav__userphoto {
+    max-height: 50px;
+    border: 2px solid white;
+    display: inline;
+}

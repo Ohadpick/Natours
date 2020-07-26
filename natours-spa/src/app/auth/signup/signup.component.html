@@ -1,0 +1,74 @@
+<main class="main">
+  <div class="login-form">
+    
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
+      <h2 class="heading-secondary ma-bt-lg">Sign Up</h2>
+        <!-- <hr> -->
+      
+        <div class="form__group">
+          <label class="form__label" for="email">User Name</label>
+          <input type="text" 
+            [ngClass]="{'is-invalid': signupForm.get('username').errors && signupForm.get('username').touched}"
+            class="form__input" formControlName="username" placeholder="Username">
+          <div class="invalid-feedback">Please choose a username</div>
+        </div>
+
+        <div class="form__group">
+            <label class="form__label" for="email">Email address</label>
+            <input type="text" 
+              [ngClass]="{'is-invalid': signupForm.get('email').errors && signupForm.get('email').touched}"
+              class="form__input" formControlName="email" placeholder="you@example.com">
+            <div class="invalid-feedback">Please choose an email</div>
+          </div>
+
+        <div class="form__group">
+          <label class="form__label" for="email">Password</label>
+          <input type="password" 
+            [ngClass]="{'is-invalid': signupForm.get('password').errors 
+            && signupForm.get('password').touched}"
+            class="form__input" formControlName="password" placeholder="••••••••">
+          <div class="invalid-feedback" 
+            *ngIf="signupForm.get('password').hasError('required') 
+              && signupForm.get('password').touched">
+              Password is required
+          </div>
+          <div class="invalid-feedback" 
+            *ngIf="signupForm.get('password').hasError('minlength') 
+              && signupForm.get('password').touched">
+              Password must be at leaset 4 characters
+          </div>
+          <div class="invalid-feedback" 
+            *ngIf="signupForm.get('password').hasError('maxlength') 
+              && signupForm.get('password').touched">
+              Password cannot exceed 16 characters
+          </div>
+        </div>
+      
+        <div class="form__group">
+          <label class="form__label" for="email">Confirm Password</label>
+          <input type="password" 
+            [ngClass]="{'is-invalid': signupForm.get('confirmPassword').errors 
+                                  && signupForm.get('confirmPassword').touched
+                                  || signupForm.get('confirmPassword').touched
+                                  && signupForm.hasError('mismatch')}"
+            class="form__input" formControlName="confirmPassword" placeholder="••••••••">
+          <div class="invalid-feedback" 
+            *ngIf="signupForm.get('confirmPassword').hasError('required') 
+              && signupForm.get('confirmPassword').touched">
+              Confirm password is required
+          </div>
+          <div class="invalid-feedback" 
+            *ngIf="signupForm.hasError('mismatch') 
+              && signupForm.get('confirmPassword').touched">
+              Password must match
+          </div>
+        </div>
+      
+        <div class="form__group text-center">
+          <button class="btn btn-success btn__align__left" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
+          <button class="btn btn-default btn__align__right" type="button" (click)="cancel()">Cancel</button>
+        </div>
+        
+      </form>
+  </div>
+</main>

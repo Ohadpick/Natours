@@ -1,0 +1,4 @@
+.footer__logo span {
+    display:flex;   
+    justify-content: flex-end;
+}

@@ -1,0 +1,32 @@
+<main class="main">
+    <div class="user-view">
+        <nav class="user-view__menu">
+            <ul class="side-nav">
+                <li class="side-nav-active"><a href="/users/settings">
+                    <svg>
+                        <use xlink:href="/assets/img/icons.svg#icon-settings"></use>
+                    </svg>Settings</a>
+                </li>
+                <li><a href="/users/bookings">
+                    <svg>
+                        <use xlink:href="/assets/img/icons.svg#icon-briefcase"></use>
+                    </svg>My bookings</a>
+                </li>
+                <li><a href="/users/reviews">
+                    <svg>
+                        <use xlink:href="/assets/img/icons.svg#icon-star"></use>
+                    </svg>My reviews</a>
+                </li>
+                <!-- <li><a href="/users/billings">
+                    <svg>
+                        <use xlink:href="/assets/img/icons.svg#icon-credit-card"></use>
+                    </svg>Billing</a>
+                </li> -->
+            </ul>
+        </nav>
+        <div *ngIf="this.componentToDisplay === 'settings'"><app-user-settings></app-user-settings></div>
+        <div *ngIf="this.componentToDisplay === 'reviews'"><app-user-reviews></app-user-reviews></div>
+        <div *ngIf="this.componentToDisplay === 'bookings'"><app-user-bookings></app-user-bookings></div>
+        <div *ngIf="this.componentToDisplay === 'billings'"><app-user-billings></app-user-billings></div>
+    </div>
+</main>

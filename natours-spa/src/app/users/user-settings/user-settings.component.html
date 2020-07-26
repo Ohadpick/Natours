@@ -1,0 +1,50 @@
+<div class="user-view__content">
+  <div class="user-view__form-container">
+    <h2 class="heading-secondary ma-bt-md">Your account settings</h2>
+    <form class="form form-user-data" #settingsForm="ngForm" (ngSubmit)="save()">
+      <div class="form__group">
+        <label class="form__label" for="name">Name</label>
+        <input class="form__input" id="name" type="text" value="userSettings.name" required="required" name="name"
+        name="name" required [(ngModel)]="userSettings.name" />
+      </div>
+      <div class="form__group ma-bt-md">
+        <label class="form__label" for="email">Email address</label>
+        <input class="form__input" id="email" type="email" value="userSettings.email" required="required" name="email"
+        name="email" required [(ngModel)]="userSettings.email" />
+      </div>
+      <div class="form__group form__photo-upload">
+        <img class="form__user-photo" src="{{utilService.serverResourceUrl()}}img/users/{{userSettings.photo}}" alt="{{userSettings.name}}"/>
+        <input class="form__upload" type="file" accept="image/*" id="photo" name="photo" 
+          (change)="handleFileInput($event.target.files)"/>
+        <label for="photo">Choose new photo</label>
+      </div>
+      <div class="form__group right">
+        <button [disabled]=!settingsForm.valid class="btn btn--small btn--green btn--save-settings" type="submit">Save settings</button>
+      </div>
+    </form>
+  </div>
+  <div class="line">&nbsp;</div>
+  <div class="user-view__form-container">
+    <h2 class="heading-secondary ma-bt-md">Password change</h2>
+    <form class="form form-user-password" #passwordForm="ngForm" (ngSubmit)="savePassword()">
+      <div class="form__group">
+        <label class="form__label" for="password-current">Current password</label>
+        <input class="form__input" id="password-current" type="password" placeholder="••••••••" required="required" minlength="8"
+        name="password" required [(ngModel)]="userPassword.passwordCurrent" />
+      </div>
+      <div class="form__group">
+        <label class="form__label" for="password">New password</label>
+        <input class="form__input" id="password" type="password" placeholder="••••••••" required="required" minlength="8"
+        name="password" required [(ngModel)]="userPassword.password" />
+      </div>
+      <div class="form__group ma-bt-lg">
+        <label class="form__label" for="password-confirm">Confirm password</label>
+        <input class="form__input" id="password-confirm" type="password" placeholder="••••••••" required="required" minlength="8"
+        name="passwordConfirm" required [(ngModel)]="userPassword.passwordConfirm" />
+      </div>
+      <div class="form__group right">
+        <button [disabled]=!passwordForm.valid class="btn btn--small btn--green btn--save-password" type="submit">Save password</button>
+      </div>
+    </form>
+  </div>
+</div>

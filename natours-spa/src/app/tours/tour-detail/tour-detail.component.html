@@ -1,0 +1,96 @@
+
+<section class="section-header">
+    <div class="header__hero">
+      <div class="header__hero-overlay">&nbsp;</div><img class="header__hero-img" src="{{utilService.serverResourceUrl()}}img/tours/{{tour.imageCover}}" alt="{{tour.name}}"/>
+    </div>
+    <div class="heading-box">
+      <h1 class="heading-primary"><span>{{tour.name}} tour</span></h1>
+      <div class="heading-box__group">
+        <div class="heading-box__detail">
+          <svg class="heading-box__icon">
+            <use xlink:href="/assets/img/icons.svg#icon-clock"></use>
+          </svg><span class="heading-box__text">{{tour.duration}} days</span>
+        </div>
+        <div class="heading-box__detail">
+          <svg class="heading-box__icon">
+            <use xlink:href="/assets/img/icons.svg#icon-map-pin"></use>
+          </svg><span class="heading-box__text">{{tour.startLocation.description}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-description">
+    <div class="overview-box">
+      <div>
+        <div class="overview-box__group">
+          <h2 class="heading-secondary ma-bt-lg">Quick facts</h2>
+          <div class="overview-box__detail">
+            <svg class="overview-box__icon">
+              <use xlink:href="/assets/img/icons.svg#icon-calendar"></use>
+            </svg><span class="overview-box__label">Next date</span><span class="overview-box__text">{{tour.startDates[0] | date: 'MMMM, yyyy'}}</span>
+          </div>
+          <div class="overview-box__detail">
+            <svg class="overview-box__icon">
+              <use xlink:href="/assets/img/icons.svg#icon-trending-up"></use>
+            </svg><span class="overview-box__label">Difficulty</span><span class="overview-box__text">{{tour.difficulty}}</span>
+          </div>
+          <div class="overview-box__detail">
+            <svg class="overview-box__icon">
+              <use xlink:href="/assets/img/icons.svg#icon-user"></use>
+            </svg><span class="overview-box__label">Participants</span><span class="overview-box__text">{{tour.maxGroupSize}} people</span>
+          </div>
+          <div class="overview-box__detail">
+            <svg class="overview-box__icon">
+              <use xlink:href="/assets/img/icons.svg#icon-star"></use>
+            </svg><span class="overview-box__label">Rating</span><span class="overview-box__text">{{tour.ratingsAverage}} / 5</span>
+          </div>
+        </div>
+        <div class="overview-box__group">
+          <h2 class="heading-secondary ma-bt-lg">Your tour guides
+            <div class="overview-box__detail" *ngFor="let guide of tour.guides">
+              <img class="overview-box__img" src="{{utilService.serverResourceUrl()}}img/users/{{guide.photo}}" alt="{{guide.name}}"/>
+              <span class="overview-box__label" *ngIf="guide.role === 'lead-guide'">Lead Guide</span>
+              <span class="overview-box__label" *ngIf="guide.role === 'guide'">Tour Guide</span>
+              <span class="overview-box__text">{{guide.name}}</span>
+            </div>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="description-box">
+      <h2 class="heading-secondary ma-bt-lg">About {{tour.name}} tour</h2>
+      <p *ngFor="let item of tour.description.split('\n'); let i = index" class="description__text">
+        {{tour.description.split('\n')[i]}}
+      </p>
+    </div>
+  </section>
+  <section class="section-pictures">
+      <div class="picture-box" *ngFor="let image of tour.images; let i = index">
+          <img class="picture-box__img picture-box__img--{{i + 1}}" src="{{utilService.serverResourceUrl()}}img/tours/{{image}}" alt="{{tour.name}} Tour {{i + 1}}"/>
+      </div>
+  </section>
+  <section class="section-map">
+    <app-map [locations]="tour.locations"></app-map>
+  </section>
+  <section class="section-reviews">
+    <div class="reviews">
+      <div *ngFor="let review of tour.reviews">
+        <app-review-card [review]="review"></app-review-card>
+      </div>
+    </div>
+  </section>
+  <section class="section-cta">
+    <div class="cta">
+      <div class="cta__img cta__img--logo">
+        <img src="/assets/img/logo-white.png" alt="Natours logo"/>
+      </div>
+      <img class="cta__img cta__img--1" src="{{utilService.serverResourceUrl()}}img/tours/{{tour.images[1]}}" alt="Tour picture"/>
+      <img class="cta__img cta__img--2" src="{{utilService.serverResourceUrl()}}img/tours/{{tour.images[2]}}" alt="Tour picture"/>
+      <div class="cta__content">
+        <h2 class="heading-secondary">What are you waiting for?</h2>
+        <p class="cta__text">{{tour.duration}} days. 1 adventure. Infinite memories. Make it yours today!</p>
+        <a *ngIf="!loggedIn()" class="btn btn--green span-all-rows" href="/login">Log in to book tour</a>
+        <a *ngIf="loggedIn()" class="btn btn--green span-all-rows" href="/bookings/{{tour._id}}">Book tour now!</a>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,11 @@
+.btn__align__right {
+    text-align: right;
+    position: relative;
+    right: -2rem;
+}
+
+.btn__align__left {
+    text-align: left;
+    position: relative;
+    left: -2rem;
+  }
