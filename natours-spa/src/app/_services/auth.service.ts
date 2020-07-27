@@ -34,8 +34,6 @@ export class AuthService {
     return this.http.post(this.authUrl + '/login', user).pipe(
       map((response: any) => {
         if (response) {
-          // localStorage.setItem('token', response.token);
-          // localStorage.setItem('user', JSON.stringify(response.data.user));
           this.setUserToLocalStorage(response.data.user, response.token)
           this.decodedToken = this.jwtHelper.decodeToken(response.token);
           this.currentUser = response.data.user;
@@ -56,7 +54,7 @@ export class AuthService {
   }
 
   signup(user: User) {
-    return this.http.post(this.authUrl + 'signup', user);
+    return this.http.post(this.authUrl + '/signup', user);
   }
 
   loggedIn() {

@@ -8,9 +8,9 @@
         <div class="form__group">
           <label class="form__label" for="email">User Name</label>
           <input type="text" 
-            [ngClass]="{'is-invalid': signupForm.get('username').errors && signupForm.get('username').touched}"
-            class="form__input" formControlName="username" placeholder="Username">
-          <div class="invalid-feedback">Please choose a username</div>
+            [ngClass]="{'is-invalid': signupForm.get('name').errors && signupForm.get('name').touched}"
+            class="form__input" formControlName="name" placeholder="Username">
+          <div class="invalid-feedback">Please fill your name</div>
         </div>
 
         <div class="form__group">
@@ -47,19 +47,19 @@
         <div class="form__group">
           <label class="form__label" for="email">Confirm Password</label>
           <input type="password" 
-            [ngClass]="{'is-invalid': signupForm.get('confirmPassword').errors 
-                                  && signupForm.get('confirmPassword').touched
-                                  || signupForm.get('confirmPassword').touched
+            [ngClass]="{'is-invalid': signupForm.get('passwordConfirm').errors 
+                                  && signupForm.get('passwordConfirm').touched
+                                  || signupForm.get('passwordConfirm').touched
                                   && signupForm.hasError('mismatch')}"
-            class="form__input" formControlName="confirmPassword" placeholder="••••••••">
+            class="form__input" formControlName="passwordConfirm" placeholder="••••••••">
           <div class="invalid-feedback" 
-            *ngIf="signupForm.get('confirmPassword').hasError('required') 
-              && signupForm.get('confirmPassword').touched">
+            *ngIf="signupForm.get('passwordConfirm').hasError('required') 
+              && signupForm.get('passwordConfirm').touched">
               Confirm password is required
           </div>
           <div class="invalid-feedback" 
             *ngIf="signupForm.hasError('mismatch') 
-              && signupForm.get('confirmPassword').touched">
+              && signupForm.get('passwordConfirm').touched">
               Password must match
           </div>
         </div>

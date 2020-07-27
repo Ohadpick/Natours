@@ -23,23 +23,25 @@ export class SignupComponent implements OnInit {
 
   createSignupForm() {
     this.signupForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-      confirmPassword: ['', Validators.required]
+      passwordConfirm: ['', Validators.required]
     }, {validator: this.passwordMatchValidator});
   }
 
   passwordMatchValidator(fg: FormGroup) {
-    return fg.get('password').value === fg.get('confirmPassword').value ? null : {mismatch: true};
+    return fg.get('password').value === fg.get('passwordConfirm').value ? null : {mismatch: true};
   }
 
   signup() {
     if (this.signupForm.valid) {
       this.user = Object.assign({}, this.signupForm.value);
       this.authService.signup(this.user).subscribe(() => {
-        this.alerfity.success('registration successful');
+          debugger;
+          this.alerfity.success('registration successful');
       }, error => {
+          debugger;
           this.alerfity.error(error);
       }, () => {
         this.authService.login(this.user).subscribe(() => {
