@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.use(authController.protect);
 
-router.get('/checkout-session/:tourId', bookingController.getCheckoutSession);
+router.get('/checkout-session/:bookingId', bookingController.getCheckoutSession);
+router.post('/checkout-booking', bookingController.createBookingCheckout);
+router.patch('/checkout-paid/:bookingId', bookingController.updatePaid);
 
 router
   .route('/')

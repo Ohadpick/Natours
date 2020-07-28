@@ -38,10 +38,8 @@ export class SignupComponent implements OnInit {
     if (this.signupForm.valid) {
       this.user = Object.assign({}, this.signupForm.value);
       this.authService.signup(this.user).subscribe(() => {
-          debugger;
           this.alerfity.success('registration successful');
       }, error => {
-          debugger;
           this.alerfity.error(error);
       }, () => {
         this.authService.login(this.user).subscribe(() => {

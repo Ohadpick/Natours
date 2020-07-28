@@ -48,8 +48,8 @@ export class BookingService {
     );
   }
 
-  getCheckoutSession(tourId: string): Observable<CheckoutSession> {
-    const url = `${this.bookingsUrl}/checkout-session/${tourId}`;
+  getCheckoutSession(bookingId: string): Observable<CheckoutSession> {
+    const url = `${this.bookingsUrl}/checkout-session/${bookingId}`;
 
     console.log('GET ', url);
     return this.http.get<CheckoutSession>(url, { observe: 'response' }).pipe(
@@ -62,7 +62,11 @@ export class BookingService {
   }
 
   addBooking(booking: Booking) {
-    return this.http.post(this.bookingsUrl, booking);
+    return this.http.post(this.bookingsUrl + '/checkout-booking', booking);
+  }
+
+  updatePaid(bookingId: string) {
+    return this.http.patch(this.bookingsUrl + `/checkout-paid/${bookingId}`, { });
   }
 
 }

@@ -37,7 +37,6 @@ export class UserSettingsComponent implements OnInit {
     this.userService.updateUser(this.userSettings, this.newPhoto).subscribe ((next: APIResponse<User[]>) => {
       this.alertify.success('Profile update successfuly');
 
-      debugger;
       const value: any = next.data.data;
       this.updateCurrentUserData(value.photo);
 

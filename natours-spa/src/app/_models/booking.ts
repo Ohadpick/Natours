@@ -5,7 +5,7 @@ export interface Booking {
     _id?: string;
     price: number;
     createdAt?: Date;
-    paid: boolean;
+    paid?: boolean;
     tour: Tour;
     user: User;
 }

@@ -11,6 +11,7 @@ import { BookingService } from 'src/app/_services/booking.service';
 import { CheckoutSession } from 'src/app/_models/checkoutSession';
 import { loadStripe } from '@stripe/stripe-js';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tour-detail',
@@ -55,25 +56,23 @@ export class TourDetailComponent implements OnInit {
   }
 
   async bookTour() {
-    const stripePromise  = await loadStripe(
-          'pk_test_51H1StUJMi3G5m52Y2T6o73JrS8RKysitdMLNOFYqTfj5OJ67jZzniMD8Imr1bDFNmQai99wwjDejlwYo68ztrBfp00cTIFzdVv');
+    const booking: Booking = { tour: this.tour, user: this.authService.currentUser, price: this.tour.price };
 
-    this.bookingService.getCheckoutSession(this.tour._id).subscribe(async (response: CheckoutSession) => {
-      const sessionId = response.session.id.toString();
+    this.bookingService.addBooking(booking).subscribe(async (response: APIResponse<Booking>) => {
+      const bookingId = response.data.data._id;
 
-      const stripe = await stripePromise;
+      const stripePromise  = await loadStripe(environment.stripe);
 
-      const { error } = await stripe.redirectToCheckout({
-        sessionId,
+      this.bookingService.getCheckoutSession(bookingId).subscribe(async (response: CheckoutSession) => {
+        const sessionId = response.session.id.toString();
+
+        const stripe = await stripePromise;
+
+        const { error } = await stripe.redirectToCheckout({
+          sessionId,
+        });
       });
 
-      // Never reach here, it navigate back to tour
-      // const booking: Booking = { tour: this.tour, user: this.authService.currentUser, price: this.tour.price, paid: true};
-
-      // this.bookingService.addBooking(booking).subscribe(response => {
-      //   debugger;
-      //   this.alertify.success(`${this.tour.name} tour succesfully booked`);
-      // });
     });
   }
 

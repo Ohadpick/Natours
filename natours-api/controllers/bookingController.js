@@ -6,7 +6,9 @@ const factory = require('./handlerFactory');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Get the currently booked tour
-  const tour = await Tour.findById(req.params.tourId);
+  const booking = await Booking.findById(req.params.bookingId);
+
+  const tour = await Tour.findById(booking.tour._id);
 
   // 2) Create checkout session
   const session = await stripe.checkout.sessions.create({
@@ -15,7 +17,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     //   req.params.tourId
     // }&user=${req.user.id}&price=${tour.price}`,
     // cancel_url: `${req.protocol}://${req.get('host')}/${tour.slug}`,
-    success_url: `http://localhost:4200/tours/?tour=${req.params.tourId}&user=${req.user.id}&price=${tour.price}`,
+    success_url: `http://localhost:4200/bookings/${booking._id}`,
     cancel_url: `http://localhost:4200/tour/${tour.slug}`,
     customer_email: req.user.email,
     client_reference_id: req.params.tourId,
@@ -39,14 +41,37 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 exports.createBookingCheckout = catchAsync(async (req, res, next) => {
   // This is only temporary, because it's unsecure: everyone can make booking without paying!
-  const { tour, user, price } = req.query;
+  const { tour, user, price } = req.body;
 
   if (!tour || !user || !price) return next();
 
-  await Booking.create({ tour, user, price });
+  const booking = await Booking.create({ tour, user, price });
 
-  res.redirect(req.originalUrl.split('?')[0]);
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: booking,
+    }
+  });
+  //res.redirect(req.originalUrl.split('?')[0]);
 });
+
+exports.updatePaid = catchAsync(async (req, res, next) => {
+  const booking = await Booking.findById(req.params.bookingId);
+  booking.paid = true;
+
+  const doc = await Booking.findByIdAndUpdate(req.params.bookingId, booking, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: doc,
+    }
+  });
+})
 
 exports.getAllBookings = factory.getAll(Booking);
 exports.getBooking = factory.getOne(Booking);

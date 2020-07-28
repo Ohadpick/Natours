@@ -25,6 +25,7 @@ import { UserBillingsComponent } from './users/user-billings/user-billings.compo
 import { SidebarComponent } from './utils/sidebar/sidebar.component';
 import { ReviewCardComponent } from './reviews/review-card/review-card.component';
 import { ReviewCardTourComponent } from './reviews/review-card-tour/review-card-tour.component';
+import { AfterBookingComponent } from './bookings/after-booking/after-booking.component';
 
 
 export function tokenGetter() {
@@ -48,7 +49,8 @@ export function tokenGetter() {
     UserBillingsComponent,
     SidebarComponent,
     ReviewCardComponent,
-    ReviewCardTourComponent
+    ReviewCardTourComponent,
+    AfterBookingComponent
   ],
   imports: [
     BrowserModule,
