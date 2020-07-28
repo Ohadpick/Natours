@@ -90,7 +90,8 @@
         <h2 class="heading-secondary">What are you waiting for?</h2>
         <p class="cta__text">{{tour.duration}} days. 1 adventure. Infinite memories. Make it yours today!</p>
         <a *ngIf="!loggedIn()" class="btn btn--green span-all-rows" href="/login">Log in to book tour</a>
-        <a *ngIf="loggedIn()" class="btn btn--green span-all-rows" href="/bookings/{{tour._id}}">Book tour now!</a>
+        <!-- <a *ngIf="loggedIn()" class="btn btn--green span-all-rows" href="/bookings/{{tour._id}}">Book tour now!</a> -->
+        <button *ngIf="loggedIn()" class="btn btn--green span-all-rows" (click)="bookTour()">Book tour now!</button>
       </div>
     </div>
   </section>

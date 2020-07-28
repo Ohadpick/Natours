@@ -18,7 +18,6 @@ import { TourCardComponent } from './tours/tour-card/tour-card.component';
 import { MapComponent } from './utils/map/map.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { BookTourComponent } from './bookings/book-tour/book-tour.component';
 import { UserSettingsComponent } from './users/user-settings/user-settings.component';
 import { UserBookingsComponent } from './users/user-bookings/user-bookings.component';
 import { UserReviewsComponent } from './users/user-reviews/user-reviews.component';
@@ -43,7 +42,6 @@ export function tokenGetter() {
     MapComponent,
     LoginComponent,
     SignupComponent,
-    BookTourComponent,
     UserSettingsComponent,
     UserBookingsComponent,
     UserReviewsComponent,
